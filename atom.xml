@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  
+  <title><![CDATA[jacksyen's blog]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://yoursite.com//"/>
+  <updated>2015-07-10T15:13:22.973Z</updated>
+  <id>http://yoursite.com//</id>
+  
+  <author>
+    <name><![CDATA[Jack Syen]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[搭建hexo + github pages]]></title>
+    <link href="http://yoursite.com/2015/07/10/hexo-github/"/>
+    <id>http://yoursite.com/2015/07/10/hexo-github/</id>
+    <published>2015-07-10T15:38:10.029Z</published>
+    <updated>2015-07-10T15:13:22.973Z</updated>
+    <content type="html"><![CDATA[<h2 id="0X1_安装包">0X1 安装包</h2><h3 id="Git"><strong>Git</strong></h3><h3 id="Node-js"><strong><a href="http://nodejs.org" target="_blank" rel="external">Node.js</a></strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://nodejs.org/dist/v0.<span class="number">12.6</span>/x64/node-v0.<span class="number">12.6</span>-x64.msi</span><br><span class="line">// install</span><br></pre></td></tr></table></figure>
+<h3 id="Hexo"><strong><a href="https://hexo.io" target="_blank" rel="external">Hexo</a> </strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h2 id="0X2_初始化">0X2 初始化</h2><h3 id="创建hexo文件夹">创建hexo文件夹</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="安装Hexo插件">安装Hexo插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo --save</span><br><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-deployer-heroku --save</span><br><span class="line">npm install hexo-deployer-rsync --save</span><br><span class="line">npm install hexo-deployer-openshift --save</span><br><span class="line">npm install hexo-renderer-marked@<span class="number">0.2</span> --save</span><br><span class="line">npm install hexo-renderer-stylus@<span class="number">0.2</span> --save</span><br><span class="line">npm install hexo-generator-feed@<span class="number">1</span> --save</span><br><span class="line">npm install hexo-generator-sitemap@<span class="number">1</span> --save</span><br></pre></td></tr></table></figure>
+<h3 id="安装主题">安装主题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/litten/hexo-theme-yilia.git themes/yilia</span><br><span class="line">npm install hexo-renderer-ejs --save</span><br></pre></td></tr></table></figure>
+<p>使用主题需要修改_config.yml中的theme参数，示例：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: carbon</span><br></pre></td></tr></table></figure></p>
+<h2 id="0X3_使用和调试">0X3 使用和调试</h2><h3 id="启动本地服务器">启动本地服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="0X4_GitHub配置SSH_keys">0X4 GitHub配置SSH keys</h2><h3 id="检查本机ssh_keys">检查本机ssh keys</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh</span><br><span class="line">ls</span><br><span class="line">// 查看</span><br></pre></td></tr></table></figure>
+<h3 id="生成新的ssh_keys">生成新的ssh keys</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">'hyqiu.syen@gmail.com'</span></span><br><span class="line">// 回车</span><br><span class="line">// 输入加密串</span><br><span class="line">// 生成成功</span><br></pre></td></tr></table></figure>
+<h3 id="添加ssh_keys至GitHub中">添加ssh keys至GitHub中</h3><ul>
+<li>cat ~/.ssh/id_rsa.pub，复制输出内容</li>
+<li>打开连接<a href="https://github.com/settings/ssh" target="_blank" rel="external">GitHub ssh设置</a>，添加SSH key</li>
+<li>复制内容至Key中即可</li>
+</ul>
+<h3 id="测试">测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line">// yes</span><br><span class="line">// 查看是否成功</span><br></pre></td></tr></table></figure>
+<h2 id="0X5_Hexo自动部署">0X5 Hexo自动部署</h2><h3 id="部署至Github">部署至Github</h3><p>修改_config.yml文件<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deploy:&#10;  type: git&#10;  repository: git@github.com:jacksyen/jacksyen.github.io.git&#10;  branch: master</span><br></pre></td></tr></table></figure></p>
+<h3 id="部署命令行文件">部署命令行文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo deploy --generate</span><br></pre></td></tr></table></figure>
+<h2 id="0X6_常见问题">0X6 常见问题</h2><ul>
+<li><a href="http://livereload.com/" target="_blank" rel="external">livereload</a>自动监控文件修改，无需F5，这里不建议使用，在安装过程中，遇到必须安装.net framework sdk 2.0，才能使用，但是安装后还是不行，sdk 2.0中并不包含VCBuild.exe文件，估计还得装VC等等，测试平台：<code>win7 x64</code>,<code>nodejs-2.11.2</code></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="0X1_安装包">0X1 安装包</h2><h3 id="Git"><strong>Git</strong></h3><h3 id="Node-js"><strong><a href="http://nodejs.org" target="_blank" rel=]]>
+    </summary>
+    
+  </entry>
+  
+</feed>
