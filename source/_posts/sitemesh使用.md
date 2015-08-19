@@ -40,6 +40,7 @@ sitemesh可以将不同的页面进行组合，通过过滤器来给页面填充
 </html>
 ```
 
+
 + 其它详细配置参考：[http://wiki.sitemesh.org/wiki/display/sitemesh3/Configuring+SiteMesh+3](http://wiki.sitemesh.org/wiki/display/sitemesh3/Configuring+SiteMesh+3)
 + sitemesh3源码分析：[http://my.oschina.net/321tiantian/blog/43262](http://my.oschina.net/321tiantian/blog/43262)
 
