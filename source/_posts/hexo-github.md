@@ -1,4 +1,5 @@
 ﻿title: 搭建hexo + github pages
+date: 2015-08-10
 ---
 
 ## 0X1 安装包
