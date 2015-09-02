@@ -4,9 +4,9 @@
   <title><![CDATA[jacksyen's blog]]></title>
   
   <link href="/atom.xml" rel="self"/>
-  <link href="http://yoursite.com//"/>
-  <updated>2015-07-10T15:13:22.973Z</updated>
-  <id>http://yoursite.com//</id>
+  <link href="http://jacksyen.github.io//"/>
+  <updated>2015-09-02T13:49:48.418Z</updated>
+  <id>http://jacksyen.github.io//</id>
   
   <author>
     <name><![CDATA[Jack Syen]]></name>
@@ -16,11 +16,63 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[阿里云ubuntu14.04 python Image模块问题]]></title>
+    <link href="http://jacksyen.github.io/2015/09/02/aliyun-ubuntu-python/"/>
+    <id>http://jacksyen.github.io/2015/09/02/aliyun-ubuntu-python/</id>
+    <published>2015-09-01T16:00:00.000Z</published>
+    <updated>2015-09-02T13:49:48.418Z</updated>
+    <content type="html"><![CDATA[<h2 id="0X1_说明">0X1 说明</h2><p>在使用阿里云的时候（ubuntu14.04 64位，python v2.7.6），Image模块提示找不到，使用pip安装也不行的问题</p>
+<h2 id="0X2_解决办法">0X2 解决办法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 删除原有的PIL包</span><br><span class="line">rm -rf /usr/<span class="built_in">local</span>/lib/python2.<span class="number">7</span>/dist-packages/PIL</span><br><span class="line">apt-get install libjpeg-dev libfreetype6-dev zlib1g-dev libpng12-dev</span><br><span class="line">wget http://effbot.org/downloads/Imaging-<span class="number">1.1</span>.<span class="number">7</span>.tar.gz</span><br><span class="line">tar xzvf Imaging-<span class="number">1.1</span>.<span class="number">7</span>.tar.gz</span><br><span class="line"><span class="built_in">cd</span> Imaging-<span class="number">1.1</span>.<span class="number">7</span></span><br><span class="line">// 修改安装环境参数</span><br><span class="line">vi setup.py</span><br><span class="line">    TCL_ROOT = <span class="string">'/usr/lib/x86_64-linux-gnu'</span> </span><br><span class="line">	JPEG_ROOT = <span class="string">'/usr/lib/x86_64-linux-gnu'</span> </span><br><span class="line">	ZLIB_ROOT = <span class="string">'/usr/lib/x86_64-linux-gnu'</span> </span><br><span class="line">	TIFF_ROOT = <span class="string">'/usr/lib/x86_64-linux-gnu'</span> </span><br><span class="line">	FREETYPE_ROOT = <span class="string">'/usr/lib/x86_64-linux-gnu'</span> </span><br><span class="line">	LCMS_ROOT = <span class="string">'/usr/lib/x86_64-linux-gnu</span><br><span class="line">// 创建freetype软连接</span><br><span class="line">sudo ln -s /usr/include/freetype2 /usr/local/include/freetype</span><br><span class="line">python2.7 setup.py install</span></span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="0X1_说明">0X1 说明</h2><p>在使用阿里云的时候（ubuntu14.04 64位，python v2.7.6），Image模块提示找不到，使用pip安装也不行的问题</p>
+<h2 id="0X2_解决办法">0X2 解决办法</h2><figure]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[sitemesh使用]]></title>
+    <link href="http://jacksyen.github.io/2015/08/19/sitemesh/"/>
+    <id>http://jacksyen.github.io/2015/08/19/sitemesh/</id>
+    <published>2015-08-18T16:00:00.000Z</published>
+    <updated>2015-09-02T13:41:06.613Z</updated>
+    <content type="html"><![CDATA[<h2 id="0X1_说明">0X1 说明</h2><p>sitemesh可以将不同的页面进行组合，通过过滤器来给页面填充header，footer</p>
+<ul>
+<li>sitemesh2.x无法使用嵌套装饰；另外不能装饰jsp，velocity，freemark以外的页面（其实可以，需要自定义Filter，然后对模板进行解析）</li>
+<li>sitemesh3.x有装饰器链，可以将一个页面通过多个装饰器进行装饰；不依赖JSP，velocity等框架，可以装饰任何页面</li>
+</ul>
+<h2 id="0X2_使用">0X2 使用</h2><p>2.x版本就不在这里说明了，新项目需求使用 <a href="http://subchen.github.io/jetbrick-template/2x" target="_blank" rel="external">jetbrick</a>模板渲染，2.x中需要重写SitemeshFilter才行。</p>
+<h3 id="sitemesh3-0-0">sitemesh3.0.0</h3><ol>
+<li><p>maven中使用，添加至pom</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.sitemesh<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>sitemesh<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">version</span>&gt;</span>3.0.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在WEB-INF下添加<strong>sitemesh3.xml</strong>文件<br>这里的decorator可以是WEB-INF下的页面路径，也可以是URL，区别是指定路径时不会渲染模板，纯html输出，而指定URL时会编译渲染模板，但是这里有点需要注意，/admin/main输出页面中的模板变量是不能引用body.jetx中的。原因：sitemesh过滤的时候，先请求path，然后在请求decorator，最后合并内容输出至页面。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">sitemesh</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">mapping</span> <span class="attribute">path</span>=<span class="value">"/admin/main"</span> <span class="attribute">decorator</span>=<span class="value">"/WEB-INF/view/body.jetx"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">mapping</span> <span class="attribute">path</span>=<span class="value">"/admin/index"</span> <span class="attribute">decorator</span>=<span class="value">"/admin/base"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">sitemesh</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>body.jetx</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span><span class="tag">&lt;<span class="title">sitemesh:write</span> <span class="attribute">property</span>=<span class="value">"title"</span>/&gt;</span><span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">sitemesh:write</span> <span class="attribute">property</span>=<span class="value">"head"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">sitemesh:write</span> <span class="attribute">property</span>=<span class="value">"body"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>其它详细配置参考：<a href="http://wiki.sitemesh.org/wiki/display/sitemesh3/Configuring+SiteMesh+3" target="_blank" rel="external">http://wiki.sitemesh.org/wiki/display/sitemesh3/Configuring+SiteMesh+3</a></li>
+<li>sitemesh3源码分析：<a href="http://my.oschina.net/321tiantian/blog/43262" target="_blank" rel="external">http://my.oschina.net/321tiantian/blog/43262</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="0X1_说明">0X1 说明</h2><p>sitemesh可以将不同的页面进行组合，通过过滤器来给页面填充header，footer</p>
+<ul>
+<li>sitemesh2.x无法使用嵌套装饰；另外不能装饰jsp，velocity，freemark以外的页]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[搭建hexo + github pages]]></title>
-    <link href="http://yoursite.com/2015/07/10/hexo-github/"/>
-    <id>http://yoursite.com/2015/07/10/hexo-github/</id>
-    <published>2015-07-10T15:38:10.029Z</published>
-    <updated>2015-07-10T15:13:22.973Z</updated>
+    <link href="http://jacksyen.github.io/2015/08/10/hexo-github/"/>
+    <id>http://jacksyen.github.io/2015/08/10/hexo-github/</id>
+    <published>2015-08-09T16:00:00.000Z</published>
+    <updated>2015-09-02T13:37:12.734Z</updated>
     <content type="html"><![CDATA[<h2 id="0X1_安装包">0X1 安装包</h2><h3 id="Git"><strong>Git</strong></h3><h3 id="Node-js"><strong><a href="http://nodejs.org" target="_blank" rel="external">Node.js</a></strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://nodejs.org/dist/v0.<span class="number">12.6</span>/x64/node-v0.<span class="number">12.6</span>-x64.msi</span><br><span class="line">// install</span><br></pre></td></tr></table></figure>
 <h3 id="Hexo"><strong><a href="https://hexo.io" target="_blank" rel="external">Hexo</a> </strong></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 <h2 id="0X2_初始化">0X2 初始化</h2><h3 id="创建hexo文件夹">创建hexo文件夹</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;folder&gt;</span><br></pre></td></tr></table></figure>
